@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package rpcdatabase;
+
+
+message ClientRequest {
+    bytes data = 1;
+}
+
+message ServerResponse {
+    bytes data = 1;
+}
+
+message ClientStream {
+    int32 agentId = 1;
+    bytes data = 2;
+}
+
+message ServerStream {
+    int32 agentId = 1;
+    bytes data = 2;
+}
+
+service DataBaseService {
+    rpc Call(ClientRequest) returns (ServerResponse){}
+    rpc Send(stream ClientStream) returns (stream ServerStream){}
+}
